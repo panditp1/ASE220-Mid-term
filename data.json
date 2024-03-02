@@ -1,0 +1,20 @@
+[ 
+    {
+      "name": "Northern View Apartments",
+      "location": "123 Main Street, Anytown, CA 12345",
+      "distance_from_college": "1 mile"
+    },
+    {
+      "name": "Greenview Heights",
+      "location": "456 Elm Street, Anytown, CA 12345",
+      "distance_from_college": "2 miles"
+    },
+    {
+      "name": "Hilltop Residence",
+      "location": "789 Oak Street, Anytown, CA 12345",
+      "distance_from_college": "0.5 miles"
+    }
+
+]
+  
+  

@@ -1,0 +1,60 @@
+
+
+.navbar-custom {
+    background: linear-gradient(to right, #ff6b6b, #ffaf87, #48dbfb); 
+    color: #ffffff; 
+}
+
+
+
+#title {
+    font-weight: 400;
+}
+
+#togglerBtn {
+    border-radius: 30px;
+    border: 2px solid black;
+}
+
+@media (min-width: 992px) {
+    #title {
+        padding-left: 20px; 
+        padding-right: 20px;
+    }
+}
+
+
+#home, #khoi, #navbarDropdown {
+    font-size: 17px;
+    color: #01060c; 
+}
+
+#searchBtn, #signIns {
+    font-weight: 900;
+    color: #ffffff; 
+    background-color: #8bb0d7; 
+    border: none;
+}
+
+#searchBtn:hover, #signIns:hover {
+    color: #ffffff; 
+    background-color: #98b5d1; 
+}
+
+.dropdown-item {
+    font-weight: 350;
+    color: #343a40; 
+}
+
+.form-inline.my-2.my-lg-0 {
+    margin-left: auto; 
+    margin-right: 7%; 
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+a.nav-link:hover, .dropdown-item:hover {
+    color: #e1e0ed; 
+}
