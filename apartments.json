@@ -1,0 +1,169 @@
+{
+    "apartment_complexes": [
+        {
+            "name": "Northern View",
+            "apartment_types": [
+                {
+                    "type": "Studio",
+                    "location": "North Wing",
+                    "square_footage": 500,
+                    "ratings": [
+                        4,
+                        5,
+                        4
+                    ]
+                },
+                {
+                    "type": "One Bedroom",
+                    "location": "East Wing",
+                    "square_footage": 750,
+                    "ratings": [
+                        5,
+                        4,
+                        5
+                    ]
+                },
+                {
+                    "type": "Two Bedroom",
+                    "location": "West Wing",
+                    "square_footage": 1000,
+                    "ratings": [
+                        3,
+                        4,
+                        4
+                    ]
+                },
+                {
+                    "type": "Three Bedroom",
+                    "location": "South Wing",
+                    "square_footage": 1200,
+                    "ratings": [
+                        5,
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "type": "Penthouse",
+                    "location": "Top Floor",
+                    "square_footage": 1500,
+                    "ratings": [
+                        5,
+                        5,
+                        5
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Campus View",
+            "apartment_types": [
+                {
+                    "type": "Studio",
+                    "location": "North Block",
+                    "square_footage": 450,
+                    "ratings": [
+                        4,
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "type": "One Bedroom",
+                    "location": "East Block",
+                    "square_footage": 700,
+                    "ratings": [
+                        4,
+                        5,
+                        4
+                    ]
+                },
+                {
+                    "type": "Two Bedroom",
+                    "location": "West Block",
+                    "square_footage": 950,
+                    "ratings": [
+                        3,
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "type": "Three Bedroom",
+                    "location": "South Block",
+                    "square_footage": 1150,
+                    "ratings": [
+                        4,
+                        4,
+                        5
+                    ]
+                },
+                {
+                    "type": "Penthouse",
+                    "location": "Penthouse Suite",
+                    "square_footage": 1400,
+                    "ratings": [
+                        5,
+                        4,
+                        5
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Hampton Farms",
+            "apartment_types": [
+                {
+                    "type": "Studio",
+                    "location": "Garden Side",
+                    "square_footage": 480,
+                    "ratings": [
+                        3,
+                        4,
+                        3
+                    ]
+                },
+                {
+                    "type": "One Bedroom",
+                    "location": "Pool Side",
+                    "square_footage": 720,
+                    "ratings": [
+                        4,
+                        4,
+                        4
+                    ]
+                },
+                {
+                    "type": "Two Bedroom",
+                    "location": "Courtyard",
+                    "square_footage": 970,
+                    "ratings": [
+                        4,
+                        5,
+                        4
+                    ]
+                },
+                {
+                    "type": "Three Bedroom",
+                    "location": "Park View",
+                    "square_footage": 1100,
+                    "ratings": [
+                        5,
+                        4,
+                        5
+                    ]
+                },
+                {
+                    "type": "Penthouse",
+                    "location": "Skyline View",
+                    "square_footage": 1450,
+                    "ratings": [
+                        5,
+                        5,
+                        5
+                    ]
+                }
+            ]
+        }
+    ]
+}
