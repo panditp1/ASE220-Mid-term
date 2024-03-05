@@ -1,0 +1,81 @@
+body, html {
+    height: 100%;
+    margin: auto 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-image: url('images/background_image.jpg');
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
+    background-size: cover; 
+    background-position: center; 
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#apartment-details {
+    max-width: 800px; /* Adjust based on your preference */
+    margin: auto;
+    padding: 20px;
+    background-color: #ffffff; /* White background for the content */
+    border-radius: 8px; /* Soft edges */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    text-align: left;
+}
+
+h2 {
+    color: #160101; /* Dark grey for titles */
+    margin-bottom: 20px;
+}
+
+img.img-fluid {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px; /* Soft edges for images */
+    margin-bottom: 20px;
+}
+
+table {
+    width: 90%; /* Full width tables */
+    border-collapse: collapse; /* No double borders */
+    border: 1.2px solid #bfb0b0; /* Thicker border around the table */
+}
+
+th, td {
+    padding: 8px; /* Comfortable padding around table cells */
+    text-align: left;
+
+
+}
+
+
+th, td {
+    padding: 8px; /* Comfortable padding around table cells */
+    text-align: left;
+    border-bottom: 1px solid #ddd; /* Light line for separation */
+}
+
+th {
+    background-color: #f7f4f4; /* Slightly darker background for headers */
+    color: #333; /* Dark grey for contrast */
+}
+
+td {
+    color: #1f0707; /* Lighter text for the content */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px; /* Ensures some spacing on smaller screens */
+    }
+
+    #apartment-details {
+        margin: 20px;
+        padding: 10px;
+    }
+}
+

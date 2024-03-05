@@ -7,7 +7,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel = "stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
@@ -76,34 +76,39 @@
           const card = document.createElement('div');
           card.className = 'col-md-4 mb-4';
           const modalId = `modal${apartment.unit_number}`;
+          const availabilityIcon = apartment.availability.toLowerCase() === 'yes' 
+                                 ? '<i class="fas fa-thumbs-up"></i>' 
+                                 : '<i class="fas fa-thumbs-down"></i>';
           card.innerHTML = `
             <div class="card">
               <img src="${apartment.image}" class="card-img-top" alt="${apartment.name}">
               <div class="card-body">
-                <h5 class="card-title">${apartment.name}</h5>
-                <p class="card-text">Unit Number: ${apartment.unit_number}</p>
-                <p class="card-text">Availability: ${apartment.availability}</p>
-                <p class="card-text">Rating: ${apartment.rating}</p>
-                <!-- Button trigger modal -->
+                <h5 class="card-title apartment_name">${apartment.name}</h5>
+                <p class="card-text"> <strong> <i>Unit Number:</i> </strong> ${apartment.unit_number}</p>
+                <p class="card-text"><strong> <i>Availability: </i> </strong>${apartment.availability} ${availabilityIcon}</p>
+                <p class="card-text"><strong> <i>Rating: </i> </strong>${apartment.rating}</p>
+              
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#${modalId}">Details</button>
               </div>
             </div>
-            <!-- Modal -->
+            
             <div class="modal fade" id="${modalId}" tabindex="-1" aria-labelledby="${modalId}Label" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="${modalId}Label">${apartment.name}</h5>
+                    <h5 class="modal-title modal_title" id="${modalId}Label">${apartment.name}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
                   <div class="modal-body">
                     <img src="${apartment.image}" class="img-fluid" alt="${apartment.name}">
-                    <p>Location: ${apartment.location}</p>
-                    <p>Pricing: ${apartment.pricing}</p>
-                    <p>Contact Info: ${apartment.contact_info}</p>
-                    <p>Description: ${apartment.description}</p>
+                    <hr>
+                    <p><strong><i>Location: </i> </strong>${apartment.location} </p> <hr>
+                    <p><strong><i>Pricing: </i></strong>${apartment.pricing}</p> <hr>
+                    <p> <strong><i>Contact Info: </i></strong>${apartment.contact_info}</p>
+                    <hr>
+                    <p> <strong><i> Description: </i></strong>${apartment.description}</p> <hr>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
