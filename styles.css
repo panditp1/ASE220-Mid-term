@@ -1,7 +1,12 @@
+body {
+    background-image: url('images/background.png');
+   background-attachment: fixed;
 
+
+}
 
 .navbar-custom {
-    background: linear-gradient(to right, #ff6b6b, #ffaf87, #48dbfb); 
+    background: linear-gradient(to right, #99bae2, #4da5ce, #7987d7); 
     color: #ffffff; 
 }
 

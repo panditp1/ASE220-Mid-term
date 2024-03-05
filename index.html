@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APARTMENT REVIEWS</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel = "stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom">
+    <span><img src="images/images.jpg" alt="Apartment Icon" style="height: 40px; width: auto;"></span>
+  <a class="navbar-brand" id = "title" href="#"> <i> Apartment Reviews </i></a>
+  <button class="navbar-toggler rounded-bottom " id = "togglerBtn" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+
+
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#" id = "home"> <strong> Home </strong><span class="sr-only"></span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#" id = "khoi"><strong>  </strong></a>
+      </li>
+      <li class="nav-item dropdown active">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <strong> Explore </strong>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Northern View</a>
+          <a class="dropdown-item" href="#">Campus View</a>
+          <a class="dropdown-item" href="#">Hamptom Farms..</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-dark my-2 my-sm-0" id = "searchBtn" type="submit">Search</button>
+    </form>
+
+    <button type="button" class="btn btn-outline-dark my-2 my-sm-0 signIns" id = "signIns">Sign In/Sign Up</button>
+  </div>
+</nav>
+<body>
+
+  <div class="container mt-5">
+    <div class="row" id="apartment-listings">
+      
+    </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    fetch('apartments.json')
+      .then(response => response.json())
+      .then(apartments => {
+        const listingsContainer = document.getElementById('apartment-listings');
+        apartments.forEach(apartment => {
+          const card = document.createElement('div');
+          card.className = 'col-md-4 mb-4';
+          const modalId = `modal${apartment.unit_number}`;
+          card.innerHTML = `
+            <div class="card">
+              <img src="${apartment.image}" class="card-img-top" alt="${apartment.name}">
+              <div class="card-body">
+                <h5 class="card-title">${apartment.name}</h5>
+                <p class="card-text">Unit Number: ${apartment.unit_number}</p>
+                <p class="card-text">Availability: ${apartment.availability}</p>
+                <p class="card-text">Rating: ${apartment.rating}</p>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#${modalId}">Details</button>
+              </div>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="${modalId}" tabindex="-1" aria-labelledby="${modalId}Label" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="${modalId}Label">${apartment.name}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <img src="${apartment.image}" class="img-fluid" alt="${apartment.name}">
+                    <p>Location: ${apartment.location}</p>
+                    <p>Pricing: ${apartment.pricing}</p>
+                    <p>Contact Info: ${apartment.contact_info}</p>
+                    <p>Description: ${apartment.description}</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a href="details.html?unit_number=${apartment.unit_number}" class="btn btn-primary">More Details</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+          listingsContainer.appendChild(card);
+        });
+      })
+      .catch(error => console.log('Error loading the apartment data:', error));
+  });
+  </script>
+  
+  
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

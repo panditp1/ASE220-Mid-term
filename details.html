@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apartment Details</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel = "stylesheet" href = "styles.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <div id="apartment-details" class="row">
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function getQueryParam(param) {
+          const params = new URLSearchParams(window.location.search);
+          return params.get(param);
+        }
+      
+        const unitNumber = getQueryParam('unit_number');
+        
+        fetch('apartments.json')
+          .then(response => response.json())
+          .then(apartments => {
+            const apartment = apartments.find(ap => ap.unit_number === unitNumber);
+            if (apartment) {
+              document.getElementById('apartment-details').innerHTML = `
+                <div class="col-12">
+                  <h2>${apartment.name}</h2>
+                  <img src="${apartment.image}" class="img-fluid" alt="${apartment.name}">
+                  <p>Location: ${apartment.location}</p>
+                  <p>Unit Number: ${apartment.unit_number}</p>
+                  <p>Features: ${apartment.features.join(', ')}</p>
+                  <p>Amenities: ${apartment.amenities.join(', ')}</p>
+                  <p>Pricing: ${apartment.pricing}</p>
+                  <p>Contact Info: ${apartment.contact_info}</p>
+                  <p>Rating: ${apartment.rating} (${apartment.review_count} reviews)</p>
+                  <p>Availability: ${apartment.availability}</p>
+                  <p>Description: ${apartment.description}</p>
+                </div>
+              `;
+            } else {
+              document.getElementById('apartment-details').innerHTML = '<p>Apartment details not found.</p>';
+            }
+          })
+          .catch(error => console.log('Error loading apartment details:', error));
+      });
+      
+</script>
+</body>
+</html>
