@@ -36,6 +36,35 @@ body {
     border: 2px solid black;
 }
 
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.pagination button {
+    color: #4da5ce; /* Color of the button text */
+    background-color: transparent; /* Make the background transparent */
+    border: 1px solid #4da5ce; /* Add border to the buttons */
+    border-radius: 5px; /* Round the corners */
+    padding: 8px 16px;
+    margin: 0 5px;
+    cursor: pointer; /* Cursor to pointer to indicate it's clickable */
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+.pagination button:hover {
+    background-color: #4da5ce; /* Color for hover state */
+    color: #ffffff;
+}
+
+.pagination button.active {
+    background-color: #99bae2; /* Background color for active button */
+    color: #ffffff;
+    border-color: #99bae2;
+}
+
 @media (min-width: 992px) {
     #title {
         padding-left: 20px; 
