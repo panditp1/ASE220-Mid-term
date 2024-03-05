@@ -1,13 +1,28 @@
 body {
-    background-image: url('images/background.png');
-   background-attachment: fixed;
-
-
+    background-image: url('images/background_image.jpg');
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
+    background-size: cover; 
+    background-position: center; 
 }
+
 
 .navbar-custom {
     background: linear-gradient(to right, #99bae2, #4da5ce, #7987d7); 
     color: #ffffff; 
+}
+
+.middle-text {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: #20375b; 
+    background-color: #b7d9ec;
+    width: fit-content;
+    padding: 20px 0;
+    margin: 18px auto; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+    max-width: 80%;
+    text-align: center; 
 }
 
 
