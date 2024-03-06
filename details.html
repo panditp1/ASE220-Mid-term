@@ -71,7 +71,7 @@
     
       const unitNumber = getQueryParam('unit_number');
       
-      fetch('apartments.json')
+      fetch('https://jsonblob.com/api/1214775100003180544')
         .then(response => response.json())
         .then(apartments => {
           const apartment = apartments.find(ap => ap.unit_number === unitNumber);

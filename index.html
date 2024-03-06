@@ -219,7 +219,7 @@
             let currentFilter = new URLSearchParams(window.location.search).get('filter');
 
             function fetchApartments(page, filterName = null) {
-                fetch('apartments.json')
+                fetch('https://jsonblob.com/api/1214775100003180544')
                     .then(response => response.json())
                     .then(data => {
                         apartments = filterName ? data.filter(apartment => apartment.name.includes(filterName)) : data;
@@ -347,6 +347,54 @@
                 e.target.reset();
             });
 
+            document.getElementById('addApartmentForm').addEventListener('submit', function(e) {
+                e.preventDefault(); 
+
+                const newApartment = {
+                    name: document.getElementById('name').value,
+                    image: document.getElementById('image').value,
+                    unit_number: document.getElementById('unit_number').value,
+                    location: document.getElementById('location').value,
+                    distance_from_college: document.getElementById('distance_from_college').value,
+                    features: document.getElementById('features').value.split(',').map(feature => feature.trim()),
+                    amenities: document.getElementById('amenities').value.split(',').map(amenity => amenity.trim()),
+                    pricing: document.getElementById('pricing').value,
+                    contact_info: document.getElementById('contact_info').value,
+                    rating: parseFloat(document.getElementById('rating').value),
+                    review_count: parseInt(document.getElementById('review_count').value, 10),
+                    availability: document.getElementById('availability').value,
+                    description: document.getElementById('description').value,
+                };
+
+                
+                fetch('https://jsonblob.com/api/1214775100003180544')
+                .then(response => response.json())
+                .then(data => {
+                    
+                    data.push(newApartment);
+
+                    
+                    return fetch('https://jsonblob.com/api/1214775100003180544', {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'apiKey': '1214775100003180544' 
+                        },
+                        body: JSON.stringify(data)
+                    });
+                })
+                .then(response => {
+                    if(response.ok) {
+                        console.log('Apartment added successfully');
+                        displayApartments();
+                        updatePaginationControls();
+                    } else {
+                        console.error('Failed to update jsonblob with new apartment');
+                    }
+                })
+                .catch(error => console.error('Error adding new apartment:', error));
+            });
+
 
 
             $(document).on('click', '.edit-btn', function () {
@@ -367,22 +415,41 @@
                 }
             });
 
-            $('#editApartmentForm').on('submit', function (e) {
+            document.getElementById('editApartmentForm').addEventListener('submit', function(e) {
                 e.preventDefault();
 
-                const unitNumber = $('#editApartmentModal').data('unit-number');
-                const apartment = apartments.find(a => a.unit_number == unitNumber);
+                const unitNumber = document.getElementById('editApartmentModal').getAttribute('data-unit-number');
+                const apartmentIndex = apartments.findIndex(apartment => apartment.unit_number === unitNumber);
 
-                if (apartment) {
-                    apartment.rating = parseFloat($('#rating').val());
-                    apartment.review_count = parseInt($('#reviewCount').val(), 10);
-                    apartment.availability = $('#availability').val();
-                    apartment.image = $('#imageUrl').val(); 
-
-                    displayApartments();
-                    $('#editApartmentModal').modal('hide');
+                if (apartmentIndex !== -1) {
+                
+                    apartments[apartmentIndex].rating = document.getElementById('editRating').value;
+                    apartments[apartmentIndex].reviewCount = document.getElementById('editReviewCount').value;
+                    apartments[apartmentIndex].availability = document.getElementById('editAvailability').value;
+                    apartments[apartmentIndex].image = document.getElementById('editImageUrl').value;
+                    
+                
+                    fetch('https://jsonblob.com/api/1214775100003180544', {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'apiKey': '1214775100003180544' 
+                        },
+                        body: JSON.stringify(apartments)
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            console.log('Apartment updated successfully');
+                    
+                            displayApartments();
+                            updatePaginationControls();
+                        } else {
+                            console.error('Failed to update the apartment on jsonblob');
+                        }
+                    })
+                    .catch(error => console.error('Error updating the apartment:', error));
                 } else {
-                    console.error('Failed to update apartment data for unit number:', unitNumber);
+                    console.error('Apartment with the specified unit number not found');
                 }
             });
 
@@ -390,17 +457,34 @@
 
 
 
-            document.addEventListener('click', function (e) {
+            document.addEventListener('click', function(e) {
                 if (e.target && e.target.classList.contains('delete-btn')) {
                     const index = parseInt(e.target.getAttribute('data-index'), 10);
-                    const globalIndex = (currentPage - 1) * itemsPerPage + index; 
-                    apartments.splice(globalIndex, 1); 
+                    const globalIndex = (currentPage - 1) * itemsPerPage + index;
+                    apartments.splice(globalIndex, 1);
 
+                    
                     totalPages = Math.ceil(apartments.length / itemsPerPage);
-                    currentPage = Math.min(currentPage, totalPages); 
+                    currentPage = Math.min(currentPage, totalPages);
 
-                    displayApartments();
-                    updatePaginationControls(); 
+                    
+                    fetch('https://jsonblob.com/api/1214775100003180544', {
+                        method: 'PUT', 
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'apiKey': '1214775100003180544' 
+                        },
+                        body: JSON.stringify(apartments)
+                    })
+                    .then(response => {
+                        if(response.ok) {
+                            displayApartments();
+                            updatePaginationControls();
+                        } else {
+                            console.error('Failed to update jsonblob');
+                        }
+                    })
+                    .catch(error => console.error('Error updating jsonblob:', error));
                 }
             });
 
