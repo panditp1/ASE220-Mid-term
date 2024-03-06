@@ -65,6 +65,87 @@
         <i class="fas fa-star" style="float: right;"></i>
     </h1>
 
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addApartmentModal">Add New
+        Apartment</button>
+
+    <div class="modal fade" id="addApartmentModal" tabindex="-1" aria-labelledby="addApartmentModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addApartmentModalLabel">Add New Apartment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addApartmentForm">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Image URL</label>
+                            <input type="url" class="form-control" id="image" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="unit_number" class="form-label">Unit Number</label>
+                            <input type="text" class="form-control" id="unit_number" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="location" class="form-label">Location</label>
+                            <input type="text" class="form-control" id="location" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="distance_from_college" class="form-label">Distance from College</label>
+                            <input type="text" class="form-control" id="distance_from_college" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="features" class="form-label">Features (comma-separated)</label>
+                            <input type="text" class="form-control" id="features" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="amenities" class="form-label">Amenities (comma-separated)</label>
+                            <input type="text" class="form-control" id="amenities" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="pricing" class="form-label">Pricing</label>
+                            <input type="text" class="form-control" id="pricing" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contact_info" class="form-label">Contact Info</label>
+                            <input type="text" class="form-control" id="contact_info" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="rating" class="form-label">Rating</label>
+                            <input type="number" step="0.1" class="form-control" id="rating" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="review_count" class="form-label">Review Count</label>
+                            <input type="number" class="form-control" id="review_count" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="availability" class="form-label">Availability</label>
+                            <select class="form-select" id="availability" required>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" rows="3" required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" form="addApartmentForm">Add Apartment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
 
     <div class="container mt-5">
         <div class="row" id="apartment-listings">
@@ -81,31 +162,35 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- Edit Form -->
+
                     <form id="editApartmentForm">
-                        <!-- Form fields for each apartment detail (e.g., name, location) -->
+
                         <div class="mb-3">
-                            <label for="apartmentName" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="apartmentName">
+                            <label for="imageUrl" class="form-label">Image URL</label>
+                            <input type="url" class="form-control" id="imageUrl" placeholder="Enter image URL">
                         </div>
+
                         <div class="mb-3">
-                            <label for="unitNumber" class="form-label">Unit Number</label>
-                            <input type="text" class="form-control" id="unitNumber">
+                            <label for="rating" class="form-label">Rating</label>
+                            <input type="number" step="0.1" class="form-control" id="rating">
                         </div>
+
                         <div class="mb-3">
-                            <label for="location" class="form-label">Location</label>
-                            <input type="text" class="form-control" id="location">
+                            <label for="reviewCount" class="form-label">Review Count</label>
+                            <input type="number" class="form-control" id="reviewCount">
                         </div>
-                        <!-- ... more fields corresponding to each property of the apartment ... -->
+
                         <div class="mb-3">
                             <label for="availability" class="form-label">Availability</label>
-                            <input type="checkbox" id="availability">
+                            <select class="form-select" id="availability">
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
                         </div>
-                        <div class="mb-3">
-                            <label for="description" class="form-label">Description</label>
-                            <textarea class="form-control" id="description"></textarea>
-                        </div>
+
+
                     </form>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -123,14 +208,16 @@
         <button id="next" class="btn btn-primary">Next</button>
     </div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <script>
 
         document.addEventListener('DOMContentLoaded', function () {
-            let apartments = []; // This holds all your apartment data
+            let apartments = []; 
             let currentPage = 1;
             const itemsPerPage = 6;
             let totalPages = 3;
-            let currentApartmentIndex = null;
+
             let currentFilter = new URLSearchParams(window.location.search).get('filter');
 
             function fetchApartments(page, filterName = null) {
@@ -174,7 +261,8 @@
                 <p class="card-text"> <strong> <i>Unit Number:</i> </strong> ${apartment.unit_number}</p>
                 <p class="card-text"><strong> <i>Availability: </i> </strong>${apartment.availability} ${availabilityIcon}</p>
                 <p class="card-text"><strong> <i>Rating: </i> </strong>${apartment.rating}</p>
-              
+
+                
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#${modalId}">Details</button>
                 <button type="button" class="btn btn-danger delete-btn" data-index="${index}">Delete</button>
                 <button type="button" class="btn btn-warning edit-btn" data-bs-toggle="modal" data-bs-target="#editApartmentModal">Edit</button>
@@ -236,86 +324,85 @@
                 }
             }
 
-            document.addEventListener('click', function (e) {
-                if (e.target && e.target.classList.contains('edit-btn')) {
-                    const index = parseInt(e.target.getAttribute('data-index'), 10);
-                    currentApartmentIndex = index; // Store the index of the apartment being edited
-                    const apartmentToEdit = apartments[(currentPage - 1) * itemsPerPage + index];
-                    populateEditModal(apartmentToEdit);
-                }
-            });
-            function populateEditModal(apartment) {
-                // Set the values for each field in the form based on the apartment object
-                document.getElementById('apartmentName').value = apartment.name;
-                document.getElementById('unitNumber').value = apartment.unit_number;
-                document.getElementById('location').value = apartment.location;
-                document.getElementById('distanceFromCollege').value = apartment.distance_from_college;
-                document.getElementById('features').value = apartment.features.join(', '); // Assuming this is a text field
-                document.getElementById('amenities').value = apartment.amenities.join(', '); // Assuming this is a text field
-                document.getElementById('pricing').value = apartment.pricing;
-                document.getElementById('contactInfo').value = apartment.contact_info;
-                document.getElementById('rating').value = apartment.rating;
-                document.getElementById('reviewCount').value = apartment.review_count;
-                document.getElementById('availability').checked = apartment.availability === "Yes"; // Assuming this is a checkbox
-                document.getElementById('description').value = apartment.description;
-            }
-
-
-            document.getElementById('editApartmentForm').addEventListener('submit', function (e) {
+            document.getElementById('addApartmentForm').addEventListener('submit', function (e) {
                 e.preventDefault();
-                // Check that we have a valid index before attempting to update
-                if (currentApartmentIndex !== null) {
-                    // Get the updated data from the form
-                    const updatedName = document.getElementById('apartmentName').value;
-                    // Update the apartment's data
-                    const arrayIndex = (currentPage - 1) * itemsPerPage + currentApartmentIndex;
-                    apartments[arrayIndex].name = updatedName;
-                    // Update other fields similarly...
-                    displayApartments(); // Refresh the apartment listings
-                    // Hide the modal after updating
-                    let editModal = bootstrap.Modal.getInstance(document.getElementById('editApartmentModal'));
-                    editModal.hide();
-                    // Reset the index
-                    currentApartmentIndex = null;
+
+                const newApartment = {
+                    name: document.getElementById('name').value,
+                    image: document.getElementById('image').value,
+                    unit_number: document.getElementById('unit_number').value,
+                    location: document.getElementById('location').value,
+                    distance_from_college: document.getElementById('distance_from_college').value,
+                    features: document.getElementById('features').value.split(',').map(feature => feature.trim()),
+                    amenities: document.getElementById('amenities').value.split(',').map(amenity => amenity.trim()),
+                    pricing: document.getElementById('pricing').value,
+                    contact_info: document.getElementById('contact_info').value,
+                    rating: parseFloat(document.getElementById('rating').value),
+                    review_count: parseInt(document.getElementById('review_count').value, 10),
+                    availability: document.getElementById('availability').value,
+                    description: document.getElementById('description').value,
+                };
+
+                apartments.push(newApartment); 
+                displayApartments();
+                $('#addApartmentModal').modal('hide');
+                e.target.reset();
+            });
+
+
+
+            $(document).on('click', '.edit-btn', function () {
+                const unitNumber = $(this).closest('.card').data('unit-number');
+                const apartment = apartments.find(a => a.unit_number == unitNumber);
+
+                if (apartment) {
+                    $('#rating').val(apartment.rating || '');
+                    $('#reviewCount').val(apartment.review_count || 0); 
+                    $('#availability').val(apartment.availability || 'Yes');
+                    $('#imageUrl').val(apartment.image || ''); 
+
+                    $('#editApartmentModal').data('unit-number', unitNumber);
+
+                    $('#editApartmentModal').modal('show');
                 } else {
-                    console.error('No apartment is currently being edited.');
+                    console.error('Apartment data not found for unit number:', unitNumber);
+                }
+            });
+
+            $('#editApartmentForm').on('submit', function (e) {
+                e.preventDefault();
+
+                const unitNumber = $('#editApartmentModal').data('unit-number');
+                const apartment = apartments.find(a => a.unit_number == unitNumber);
+
+                if (apartment) {
+                    apartment.rating = parseFloat($('#rating').val());
+                    apartment.review_count = parseInt($('#reviewCount').val(), 10);
+                    apartment.availability = $('#availability').val();
+                    apartment.image = $('#imageUrl').val(); 
+
+                    displayApartments();
+                    $('#editApartmentModal').modal('hide');
+                } else {
+                    console.error('Failed to update apartment data for unit number:', unitNumber);
                 }
             });
 
 
 
 
-            document.getElementById('editApartmentForm').addEventListener('submit', function (e) {
-                e.preventDefault();
-                // Collect data from form fields
-                const updatedName = document.getElementById('apartmentName').value;
-                // Repeat for other fields
-
-                // Update the currentApartment object
-                currentApartment.name = updatedName;
-                // Repeat for other fields
-
-                // Save changes to the server or local storage if needed
-
-                // Update the display with new details
-                displayApartmentDetails(currentApartment);
-
-                // Close modal after saving changes
-                const editModal = bootstrap.Modal.getInstance(document.getElementById('editApartmentModal'));
-                editModal.hide();
-            });
 
             document.addEventListener('click', function (e) {
                 if (e.target && e.target.classList.contains('delete-btn')) {
                     const index = parseInt(e.target.getAttribute('data-index'), 10);
-                    const globalIndex = (currentPage - 1) * itemsPerPage + index; // Convert to index in global array
-                    apartments.splice(globalIndex, 1); // Modify your global apartments array
+                    const globalIndex = (currentPage - 1) * itemsPerPage + index; 
+                    apartments.splice(globalIndex, 1); 
 
                     totalPages = Math.ceil(apartments.length / itemsPerPage);
-                    currentPage = Math.min(currentPage, totalPages); // Adjust current page if necessary
+                    currentPage = Math.min(currentPage, totalPages); 
 
-                    displayApartments(); // Assumes this takes the current page number
-                    updatePaginationControls(); // Recalculate and display pagination controls
+                    displayApartments();
+                    updatePaginationControls(); 
                 }
             });
 
@@ -342,13 +429,11 @@
 
             document.querySelectorAll('.dropdown-item').forEach(item => {
                 item.addEventListener('click', function (e) {
-                    e.preventDefault(); // Prevent the default action of clicking on the link
-
+                    e.preventDefault(); 
                     currentPage = 1;
                     currentFilter = e.target.textContent.trim();
                     fetchApartments(currentPage, currentFilter);
 
-                    // Update the URL with the selected filter using the History API
                     const url = new URL(window.location.href);
                     url.searchParams.set('filter', currentFilter);
                     window.history.pushState({}, '', url);
