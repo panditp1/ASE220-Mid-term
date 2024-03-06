@@ -207,346 +207,88 @@
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
     <script>
+    document.addEventListener('DOMContentLoaded', async function() {
+        let apartments = [];
+        let currentPage = 1;
+        const itemsPerPage = 6;
+        let totalPages = 0;
+        let currentFilter = new URLSearchParams(window.location.search).get('filter');
 
-        document.addEventListener('DOMContentLoaded', function () {
-            let apartments = []; 
-            let currentPage = 1;
-            const itemsPerPage = 6;
-            let totalPages = 3;
-
-            let currentFilter = new URLSearchParams(window.location.search).get('filter');
-
-            function fetchApartments(page, filterName = null) {
-                fetch('https://jsonblob.com/api/1214775100003180544')
-                    .then(response => response.json())
-                    .then(data => {
-                        apartments = filterName ? data.filter(apartment => apartment.name.includes(filterName)) : data;
-                        totalPages = Math.ceil(apartments.length / itemsPerPage);
-                        displayApartments();
-                        updatePaginationControls();
-                    })
-                    .catch(error => console.log('Error loading the apartment data:', error));
-            }
-
-            function updateUrlParam(page) {
-                const url = new URL(window.location);
-                url.searchParams.set('page', page);
-                window.history.pushState({}, '', url);
-            }
-
-
-
-            function displayApartments() {
-                const listingsContainer = document.getElementById('apartment-listings');
-                listingsContainer.innerHTML = '';
-                const startIndex = (currentPage - 1) * itemsPerPage;
-                const endIndex = startIndex + itemsPerPage;
-                const paginatedItems = apartments.slice(startIndex, endIndex);
-                paginatedItems.forEach((apartment, index) => {
-                    const card = document.createElement('div');
-                    card.className = 'col-md-4 mb-4';
-                    const modalId = `modal${apartment.unit_number}`;
-                    const availabilityIcon = apartment.availability.toLowerCase() === 'yes'
-                        ? '<i class="fas fa-thumbs-up"></i>'
-                        : '<i class="fas fa-thumbs-down"></i>';
-                    card.innerHTML = `
-                    <div class="card" data-unit-number="${apartment.unit_number}">
-              <img src="${apartment.image}" class="card-img-top" alt="${apartment.name}">
-              <div class="card-body">
-                <h5 class="card-title apartment_name">${apartment.name}</h5>
-                <p class="card-text"> <strong> <i>Unit Number:</i> </strong> ${apartment.unit_number}</p>
-                <p class="card-text"><strong> <i>Availability: </i> </strong>${apartment.availability} ${availabilityIcon}</p>
-                <p class="card-text"><strong> <i>Rating: </i> </strong>${apartment.rating}</p>
-
-                
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#${modalId}">Details</button>
-                <button type="button" class="btn btn-danger delete-btn" data-index="${index}">Delete</button>
-                <button type="button" class="btn btn-warning edit-btn" data-bs-toggle="modal" data-bs-target="#editApartmentModal">Edit</button>
-
-
-              </div>
-            </div>
-            
-            <div class="modal fade" id="${modalId}" tabindex="-1" aria-labelledby="${modalId}Label" aria-hidden="true">
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title modal_title" id="${modalId}Label">${apartment.name}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <img src="${apartment.image}" class="img-fluid" alt="${apartment.name}">
-                    <hr>
-                    <p><strong><i>Location: </i> </strong>${apartment.location} </p> <hr>
-                    <p><strong><i>Pricing: </i></strong>${apartment.pricing}</p> <hr>
-                    <p> <strong><i>Contact Info: </i></strong>${apartment.contact_info}</p>
-                    <hr>
-                    <p> <strong><i> Description: </i></strong>${apartment.description}</p> <hr>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a href="details.html?unit_number=${apartment.unit_number}" class="btn btn-primary">More Details</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          `;
-                    listingsContainer.appendChild(card);
-                });
-            }
-
-            function updatePaginationControls() {
-                const pageButtonsContainer = document.getElementById('pageButtons');
-                pageButtonsContainer.innerHTML = '';
-
-                for (let i = 1; i <= totalPages; i++) {
-                    const pageButton = document.createElement('button');
-                    pageButton.className = 'btn btn-sm btn-outline-secondary mx-1';
-                    pageButton.textContent = i;
-
-                    if (i === currentPage) {
-                        pageButton.classList.add('active');
-                    }
-
-                    pageButton.addEventListener('click', function () {
-                        currentPage = i;
-                        fetchApartments(currentPage);
-                        updateUrlParam(currentPage);
-                        updatePaginationControls();
-                    });
-
-                    pageButtonsContainer.appendChild(pageButton);
-                }
-            }
-
-            document.getElementById('addApartmentForm').addEventListener('submit', function (e) {
-                e.preventDefault();
-
-                const newApartment = {
-                    name: document.getElementById('name').value,
-                    image: document.getElementById('image').value,
-                    unit_number: document.getElementById('unit_number').value,
-                    location: document.getElementById('location').value,
-                    distance_from_college: document.getElementById('distance_from_college').value,
-                    features: document.getElementById('features').value.split(',').map(feature => feature.trim()),
-                    amenities: document.getElementById('amenities').value.split(',').map(amenity => amenity.trim()),
-                    pricing: document.getElementById('pricing').value,
-                    contact_info: document.getElementById('contact_info').value,
-                    rating: parseFloat(document.getElementById('rating').value),
-                    review_count: parseInt(document.getElementById('review_count').value, 10),
-                    availability: document.getElementById('availability').value,
-                    description: document.getElementById('description').value,
-                };
-
-                apartments.push(newApartment); 
+        async function fetchApartments(page, filterName = null) {
+            try {
+                const response = await fetch('https://jsonblob.com/api/jsonBlob/1214775100003180544');
+                const data = await response.json();
+                apartments = filterName ? data.filter(apartment => apartment.name.includes(filterName)) : data;
+                totalPages = Math.ceil(apartments.length / itemsPerPage);
                 displayApartments();
-                $('#addApartmentModal').modal('hide');
-                e.target.reset();
-            });
+                updatePaginationControls();
+            } catch (error) {
+                console.error('Error loading the apartment data:', error);
+            }
+        }
 
-            document.getElementById('addApartmentForm').addEventListener('submit', function(e) {
-                e.preventDefault(); 
+        function displayApartments() {
+            // Your existing displayApartments implementation goes here
+        }
 
-                const newApartment = {
-                    name: document.getElementById('name').value,
-                    image: document.getElementById('image').value,
-                    unit_number: document.getElementById('unit_number').value,
-                    location: document.getElementById('location').value,
-                    distance_from_college: document.getElementById('distance_from_college').value,
-                    features: document.getElementById('features').value.split(',').map(feature => feature.trim()),
-                    amenities: document.getElementById('amenities').value.split(',').map(amenity => amenity.trim()),
-                    pricing: document.getElementById('pricing').value,
-                    contact_info: document.getElementById('contact_info').value,
-                    rating: parseFloat(document.getElementById('rating').value),
-                    review_count: parseInt(document.getElementById('review_count').value, 10),
-                    availability: document.getElementById('availability').value,
-                    description: document.getElementById('description').value,
-                };
+        function updatePaginationControls() {
+            // Your existing updatePaginationControls implementation goes here
+        }
 
-                
-                fetch('https://jsonblob.com/api/1214775100003180544')
-                .then(response => response.json())
-                .then(data => {
-                    
-                    data.push(newApartment);
-
-                    
-                    return fetch('https://jsonblob.com/api/1214775100003180544', {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'apiKey': '1214775100003180544' 
-                        },
-                        body: JSON.stringify(data)
-                    });
-                })
-                .then(response => {
-                    if(response.ok) {
-                        console.log('Apartment added successfully');
-                        displayApartments();
-                        updatePaginationControls();
-                    } else {
-                        console.error('Failed to update jsonblob with new apartment');
-                    }
-                })
-                .catch(error => console.error('Error adding new apartment:', error));
-            });
-
-
-
-            $(document).on('click', '.edit-btn', function () {
-                const unitNumber = $(this).closest('.card').data('unit-number');
-                const apartment = apartments.find(a => a.unit_number == unitNumber);
-
-                if (apartment) {
-                    $('#rating').val(apartment.rating || '');
-                    $('#reviewCount').val(apartment.review_count || 0); 
-                    $('#availability').val(apartment.availability || 'Yes');
-                    $('#imageUrl').val(apartment.image || ''); 
-
-                    $('#editApartmentModal').data('unit-number', unitNumber);
-
-                    $('#editApartmentModal').modal('show');
-                } else {
-                    console.error('Apartment data not found for unit number:', unitNumber);
-                }
-            });
-
-            document.getElementById('editApartmentForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-
-                const unitNumber = document.getElementById('editApartmentModal').getAttribute('data-unit-number');
-                const apartmentIndex = apartments.findIndex(apartment => apartment.unit_number === unitNumber);
-
-                if (apartmentIndex !== -1) {
-                
-                    apartments[apartmentIndex].rating = document.getElementById('editRating').value;
-                    apartments[apartmentIndex].reviewCount = document.getElementById('editReviewCount').value;
-                    apartments[apartmentIndex].availability = document.getElementById('editAvailability').value;
-                    apartments[apartmentIndex].image = document.getElementById('editImageUrl').value;
-                    
-                
-                    fetch('https://jsonblob.com/api/1214775100003180544', {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'apiKey': '1214775100003180544' 
-                        },
-                        body: JSON.stringify(apartments)
-                    })
-                    .then(response => {
-                        if (response.ok) {
-                            console.log('Apartment updated successfully');
-                    
-                            displayApartments();
-                            updatePaginationControls();
-                        } else {
-                            console.error('Failed to update the apartment on jsonblob');
-                        }
-                    })
-                    .catch(error => console.error('Error updating the apartment:', error));
-                } else {
-                    console.error('Apartment with the specified unit number not found');
-                }
-            });
-
-
-
-
-
-            document.addEventListener('click', function(e) {
-                if (e.target && e.target.classList.contains('delete-btn')) {
-                    const index = parseInt(e.target.getAttribute('data-index'), 10);
-                    const globalIndex = (currentPage - 1) * itemsPerPage + index;
-                    apartments.splice(globalIndex, 1);
-
-                    
-                    totalPages = Math.ceil(apartments.length / itemsPerPage);
-                    currentPage = Math.min(currentPage, totalPages);
-
-                    
-                    fetch('https://jsonblob.com/api/1214775100003180544', {
-                        method: 'PUT', 
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'apiKey': '1214775100003180544' 
-                        },
-                        body: JSON.stringify(apartments)
-                    })
-                    .then(response => {
-                        if(response.ok) {
-                            displayApartments();
-                            updatePaginationControls();
-                        } else {
-                            console.error('Failed to update jsonblob');
-                        }
-                    })
-                    .catch(error => console.error('Error updating jsonblob:', error));
-                }
-            });
-
-
-
-
-
-
-            document.getElementById('prev').addEventListener('click', function () {
-                if (currentPage > 1) {
-                    currentPage--;
-                    fetchApartments(currentPage);
-                    updateUrlParam(currentPage);
-                }
-            });
-
-            document.getElementById('next').addEventListener('click', function () {
-                if (currentPage < totalPages) {
-                    currentPage++;
-                    fetchApartments(currentPage);
-                    updateUrlParam(currentPage);
-                }
-            });
-
-            document.querySelectorAll('.dropdown-item').forEach(item => {
-                item.addEventListener('click', function (e) {
-                    e.preventDefault(); 
-                    currentPage = 1;
-                    currentFilter = e.target.textContent.trim();
-                    fetchApartments(currentPage, currentFilter);
-
-                    const url = new URL(window.location.href);
-                    url.searchParams.set('filter', currentFilter);
-                    window.history.pushState({}, '', url);
+        async function addApartment(apartment) {
+            try {
+                const response = await fetch('https://jsonblob.com/api/jsonBlob/1214775100003180544', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(apartment),
                 });
-            });
-
-
-
-            document.getElementById('prev').addEventListener('click', function () {
-                if (currentPage > 1) {
-                    currentPage--;
-                    fetchApartments(currentPage, currentFilter);
-                    updateUrlParam(currentPage);
+                if (response.ok) {
+                    console.log('Apartment added successfully');
+                    await fetchApartments(currentPage);
+                } else {
+                    console.error('Failed to add apartment');
                 }
-            });
+            } catch (error) {
+                console.error('Error adding new apartment:', error);
+            }
+        }
 
-            document.getElementById('next').addEventListener('click', function () {
-                if (currentPage < totalPages) {
-                    currentPage++;
-                    fetchApartments(currentPage, currentFilter);
-                    updateUrlParam(currentPage);
-                }
-            });
-            fetchApartments(currentPage, currentFilter);
-
-
-
-
+        document.getElementById('addApartmentForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const newApartment = {
+                // Your form fields to newApartment object mapping goes here
+            };
+            await addApartment(newApartment);
+            $('#addApartmentModal').modal('hide');
+            e.target.reset();
         });
 
-    </script>
+        // Event listeners for edit and delete operations should be implemented here
+        // using similar async/await patterns.
+
+        // Pagination control event listeners
+        document.getElementById('prev').addEventListener('click', function() {
+            if (currentPage > 1) {
+                currentPage--;
+                fetchApartments(currentPage, currentFilter);
+            }
+        });
+
+        document.getElementById('next').addEventListener('click', function() {
+            if (currentPage < totalPages) {
+                currentPage++;
+                fetchApartments(currentPage, currentFilter);
+            }
+        });
+
+        await fetchApartments(currentPage, currentFilter);
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
