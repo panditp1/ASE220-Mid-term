@@ -58,6 +58,10 @@ body {
     background-color: blue;
 }
 
+.add-btn {
+    text-align: center;
+}
+
 
 #title {
     font-weight: 400;
