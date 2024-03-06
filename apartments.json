@@ -1,7 +1,7 @@
   [
     {
       "name": "Northern View Apartments",
-      "image": "images/unit_number207.jpg",
+      "image": "images/image_1.jpg",
       "unit_number": "207",
       "location": "Meadow Trail Dr, Highland Heights, KY 41076",
       "distance_from_college": "0.4 miles",
@@ -16,7 +16,7 @@
     },
     {
       "name": "Northern View Apartments",
-      "image": "images/unit_number208.jpg",
+      "image": "images/image_2.jpg",
       "unit_number": "208",
       "location": "Meadow Trail Dr, Highland Heights, KY 41076",
       "distance_from_college": "0.4 miles",
@@ -31,7 +31,7 @@
     },
     {
       "name": "Northern View Apartments",
-      "image": "images/unit_number209.jpg",
+      "image": "images/image_3.jpg",
       "unit_number": "209",
       "location": "Meadow Trail Dr, Highland Heights, KY 41076",
       "distance_from_college": "0.4 miles",
@@ -46,7 +46,7 @@
     },
     {
       "name": "Northern View Apartments",
-      "image": "images/unit_number210.jpg",
+      "image": "images/image_4.webp",
       "unit_number": "210",
       "location": "Meadow Trail Dr, Highland Heights, KY 41076",
       "distance_from_college": "0.4 miles",
@@ -61,7 +61,7 @@
     },
   {
     "name": "Northern View Apartments",
-    "image": "images/unit_number211.jpg",
+    "image": "images/image_5.jpeg",
     "unit_number": "211",
     "location": "Meadow Trail Dr, Highland Heights, KY 41076",
     "distance_from_college": "0.4 miles",
@@ -76,7 +76,7 @@
   },
   {
     "name": "Northern View Apartments",
-    "image": "images/unit_number212.jpg",
+    "image": "images/image_6.jpg",
     "unit_number": "212",
     "location": "Meadow Trail Dr, Highland Heights, KY 41076",
     "distance_from_college": "0.4 miles",
@@ -91,7 +91,7 @@
   },
     {
       "name": "Campus View",
-      "image": "images/unit_number80.jpg",
+      "image": "images/image_7.jpg",
       "unit_number": "80",
       "location": "Hidden Valley Dr, Highland Heights, KY 41076",
       "distance_from_college": "1.4 miles",
@@ -106,7 +106,7 @@
     },
     {
       "name": "Campus View",
-      "image": "images/unit_number81.jpg",
+      "image": "images/image_8.jpg",
       "unit_number": "81",
       "location": "Hidden Valley Dr, Highland Heights, KY 41076",
       "distance_from_college": "1.4 miles",
@@ -121,7 +121,7 @@
     },
     {
       "name": "Campus View",
-      "image": "images/unit_number82.jpg",
+      "image": "images/image_9.jpg",
       "unit_number": "82",
       "location": "Hidden Valley Dr, Highland Heights, KY 41076",
       "distance_from_college": "1.4 miles",
@@ -136,7 +136,7 @@
     },
     {
       "name": "Campus View",
-      "image": "images/unit_number83.jpg",
+      "image": "images/image_10.avif",
       "unit_number": "83",
       "location": "Hidden Valley Dr, Highland Heights, KY 41076",
       "distance_from_college": "1.4 miles",
@@ -151,7 +151,7 @@
     },
     {
       "name": "Campus View",
-      "image": "images/unit_number84.jpg",
+      "image": "images/image_11.jpg",
       "unit_number": "84",
       "location": "Hidden Valley Dr, Highland Heights, KY 41076",
       "distance_from_college": "1.4 miles",
@@ -166,7 +166,7 @@
     },
     {
       "name": "Campus View",
-      "image": "images/unit_number85.jpg",
+      "image": "images/image_12.jpg",
       "unit_number": "85",
       "location": "Hidden Valley Dr, Highland Heights, KY 41076",
       "distance_from_college": "1.4 miles",
@@ -181,7 +181,7 @@
     },
     {
       "name": "Hampton Farms",
-      "image": "images/unit_numberA10.avif",
+      "image": "images/image_13.png",
       "unit_number": "A10",
       "location": "Martha Layne Collins Blvd, Highland Heights, KY 41076",
       "distance_from_college": "0.5 miles",
@@ -196,7 +196,7 @@
     },
     {
       "name": "Hampton Farms",
-      "image": "images/unit_numberA11.jpg",
+      "image": "images/image_14.jpg",
       "unit_number": "A11",
       "location": "Martha Layne Collins Blvd, Highland Heights, KY 41076",
       "distance_from_college": "0.5 miles",
@@ -211,7 +211,7 @@
     },
     {
       "name": "Hampton Farms",
-      "image": "images/unit_numberA12.jpg",
+      "image": "images/image_15.jpg",
       "unit_number": "A12",
       "location": "Martha Layne Collins Blvd, Highland Heights, KY 41076",
       "distance_from_college": "0.5 miles",
@@ -226,7 +226,7 @@
     },
     {
       "name": "Hampton Farms",
-      "image": "images/unit_numberA13.jpg",
+      "image": "images/image_16.jpg",
       "unit_number": "A13",
       "location": "Martha Layne Collins Blvd, Highland Heights, KY 41076",
       "distance_from_college": "0.5 miles",
@@ -241,7 +241,7 @@
     },
     {
       "name": "Hampton Farms",
-      "image": "images/unit_numberA14.jpg",
+      "image": "images/image_17.jpg",
       "unit_number": "A14",
       "location": "Martha Layne Collins Blvd, Highland Heights, KY 41076",
       "distance_from_college": "0.5 miles",
@@ -256,7 +256,7 @@
     },
     {
       "name": "Hampton Farms",
-      "image": "images/unit_numberA15.jpg",
+      "image": "images/image_18.webp",
       "unit_number": "A15",
       "location": "Martha Layne Collins Blvd, Highland Heights, KY 41076",
       "distance_from_college": "0.5 miles",

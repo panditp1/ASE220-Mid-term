@@ -8,8 +8,21 @@ body {
 
 
 .navbar-custom {
-    background: linear-gradient(to right, #99bae2, #4da5ce, #7987d7); 
+    background: linear-gradient(to right, #99bae2, #4da5ce, #7987d7);
+    color: #ffffff;
+}
+
+.navbar-custom .navbar-brand, .navbar-custom .nav-link {
     color: #ffffff; 
+    transition: color 0.3s ease;
+}
+
+.icon-img {
+    margin-left: 15px;
+}
+
+.navbar-custom .navbar-brand:hover, .navbar-custom .nav-link:hover {
+    color: #cae9ff; 
 }
 
 .middle-text {
@@ -31,6 +44,14 @@ body {
     text-shadow: 5px 5px 1px rgba(0,0,0,0.1); 
     margin-top: 9px !important; 
     margin-bottom: 25px; 
+}
+
+.search-area{
+    margin-right: 50px;
+}
+
+.search-button {
+    margin-left: 12px;
 }
 
 .btn-back {
@@ -55,26 +76,32 @@ body {
 }
 
 .pagination button {
-    color: #4da5ce; /* Color of the button text */
-    background-color: transparent; /* Make the background transparent */
-    border: 1px solid #4da5ce; /* Add border to the buttons */
-    border-radius: 5px; /* Round the corners */
+    color: #071820; 
+    background-color: rgba(184, 206, 231, 0.8); /
+    border: 1px solid #1d536c; 
+    border-radius: 5px;
     padding: 8px 16px;
     margin: 0 5px;
-    cursor: pointer; /* Cursor to pointer to indicate it's clickable */
-    transition: background-color 0.3s ease; /* Smooth transition for background color */
+    cursor: pointer; 
+    transition: background-color 0.3s ease, color 0.3s ease; 
 }
 
 .pagination button:hover {
-    background-color: #4da5ce; /* Color for hover state */
+    background-color: #4da5ce; 
     color: #ffffff;
 }
 
 .pagination button.active {
-    background-color: #99bae2; /* Background color for active button */
-    color: #ffffff;
-    border-color: #99bae2;
+    color: #040f28;
+    background: linear-gradient(135deg, #c6cfda 0%, #4686d4 100%); 
+    border-radius: 5px; 
+    padding: 8px 16px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
 }
+
 
 @media (min-width: 992px) {
     #title {
@@ -84,21 +111,28 @@ body {
 }
 
 
-#home, #khoi, #navbarDropdown {
+#home, #contact, #navbarDropdown {
     font-size: 17px;
-    color: #01060c; 
+    color: #38393a; 
 }
 
-#searchBtn, #signIns {
-    font-weight: 900;
-    color: #ffffff; 
-    background-color: #8bb0d7; 
+#home:hover, #contact:hover, #navbarDropdown:hover {
+    color: rgb(239, 233, 236);
+}
+
+.search-button, #signIns {
+    font-weight: 200;
+    color: #ffffff;
+    background-color: #85bff3; 
     border: none;
+    transition: background-color 0.3s ease;
+    margin-right: 15px;
 }
 
-#searchBtn:hover, #signIns:hover {
+
+.search-button:hover, #signIns:hover {
     color: #ffffff; 
-    background-color: #98b5d1; 
+    background-color: #6ba8e4; 
 }
 
 .dropdown-item {
@@ -166,3 +200,15 @@ a.nav-link:hover, .dropdown-item:hover {
     border-color: #250a0a;
     border-width: 1.8px; 
 }
+
+.card {
+    box-shadow: 5px 6px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    border: none;
+    background-color: rgba(199, 206, 222, 0.6)
+  }
+
+  .card:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+    transform: translateY(-5px);
+  }
