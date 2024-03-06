@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APARTMENT REVIEWS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom">
+        <span><img src="images/images.jpg" alt="Apartment Icon" style="height: 40px; width: auto;"></span>
+        <a class="navbar-brand" id="title" href="#"> <i> Student Living</i></a>
+        <button class="navbar-toggler rounded-bottom " id="togglerBtn" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="test.html" id="home"> <strong> Home </strong><span
+                            class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html" id="contact"><strong> Contact Us </strong> <span
+                            class="sr-only"></span></a>
+                </li>
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <strong> Explore </strong>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Northern View</a>
+                        <a class="dropdown-item" href="#">Campus View</a>
+                        <a class="dropdown-item" href="#">Hampton Farms</a>
+                    </div>
+                </li>
+            </ul>
+            <form class="d-flex" role="search">
+                <input class="form-control btn-outline-dark me-auto" type="search" placeholder="Search"
+                    aria-label="Search">
+                <button class="btn btn-outline-dark" type="submit">Search</button>
+            </form>
+
+            <button type="button" class="btn btn-outline-dark my-2 my-sm-0 signIns" id="signIns">Sign In/Sign
+                Up</button>
+        </div>
+    </nav>
+
+    <h1 class="text-center p-3 middle-text">
+        <i class="fas fa-star" style="float: left;"></i>
+        <i>APARTMENT REVIEWS</i>
+        <i class="fas fa-star" style="float: right;"></i>
+    </h1>
+
+
+    <div class="container mt-5">
+        <div class="row" id="apartment-listings">
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="editApartmentModal" tabindex="-1" aria-labelledby="editApartmentModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editApartmentModalLabel">Edit Apartment Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Edit Form -->
+                    <form id="editApartmentForm">
+                        <!-- Form fields for each apartment detail (e.g., name, location) -->
+                        <div class="mb-3">
+                            <label for="apartmentName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="apartmentName">
+                        </div>
+                        <div class="mb-3">
+                            <label for="unitNumber" class="form-label">Unit Number</label>
+                            <input type="text" class="form-control" id="unitNumber">
+                        </div>
+                        <div class="mb-3">
+                            <label for="location" class="form-label">Location</label>
+                            <input type="text" class="form-control" id="location">
+                        </div>
+                        <!-- ... more fields corresponding to each property of the apartment ... -->
+                        <div class="mb-3">
+                            <label for="availability" class="form-label">Availability</label>
+                            <input type="checkbox" id="availability">
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" form="editApartmentForm">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pagination text-center m-3">
+        <button id="prev" class="btn btn-primary">Previous</button>
+        <div id="pageButtons" class="d-inline">
+
+        </div>
+        <button id="next" class="btn btn-primary">Next</button>
+    </div>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            let apartments = []; // This holds all your apartment data
+            let currentPage = 1;
+            const itemsPerPage = 6;
+            let totalPages = 3;
+            let currentApartmentIndex = null;
+            let currentFilter = new URLSearchParams(window.location.search).get('filter');
+
+            function fetchApartments(page, filterName = null) {
+                fetch('apartments.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        apartments = filterName ? data.filter(apartment => apartment.name.includes(filterName)) : data;
+                        totalPages = Math.ceil(apartments.length / itemsPerPage);
+                        displayApartments();
+                        updatePaginationControls();
+                    })
+                    .catch(error => console.log('Error loading the apartment data:', error));
+            }
+
+            function updateUrlParam(page) {
+                const url = new URL(window.location);
+                url.searchParams.set('page', page);
+                window.history.pushState({}, '', url);
+            }
+
+
+
+            function displayApartments() {
+                const listingsContainer = document.getElementById('apartment-listings');
+                listingsContainer.innerHTML = '';
+                const startIndex = (currentPage - 1) * itemsPerPage;
+                const endIndex = startIndex + itemsPerPage;
+                const paginatedItems = apartments.slice(startIndex, endIndex);
+                paginatedItems.forEach((apartment, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'col-md-4 mb-4';
+                    const modalId = `modal${apartment.unit_number}`;
+                    const availabilityIcon = apartment.availability.toLowerCase() === 'yes'
+                        ? '<i class="fas fa-thumbs-up"></i>'
+                        : '<i class="fas fa-thumbs-down"></i>';
+                    card.innerHTML = `
+                    <div class="card" data-unit-number="${apartment.unit_number}">
+              <img src="${apartment.image}" class="card-img-top" alt="${apartment.name}">
+              <div class="card-body">
+                <h5 class="card-title apartment_name">${apartment.name}</h5>
+                <p class="card-text"> <strong> <i>Unit Number:</i> </strong> ${apartment.unit_number}</p>
+                <p class="card-text"><strong> <i>Availability: </i> </strong>${apartment.availability} ${availabilityIcon}</p>
+                <p class="card-text"><strong> <i>Rating: </i> </strong>${apartment.rating}</p>
+              
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#${modalId}">Details</button>
+                <button type="button" class="btn btn-danger delete-btn" data-index="${index}">Delete</button>
+                <button type="button" class="btn btn-warning edit-btn" data-bs-toggle="modal" data-bs-target="#editApartmentModal">Edit</button>
+
+
+              </div>
+            </div>
+            
+            <div class="modal fade" id="${modalId}" tabindex="-1" aria-labelledby="${modalId}Label" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title modal_title" id="${modalId}Label">${apartment.name}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <img src="${apartment.image}" class="img-fluid" alt="${apartment.name}">
+                    <hr>
+                    <p><strong><i>Location: </i> </strong>${apartment.location} </p> <hr>
+                    <p><strong><i>Pricing: </i></strong>${apartment.pricing}</p> <hr>
+                    <p> <strong><i>Contact Info: </i></strong>${apartment.contact_info}</p>
+                    <hr>
+                    <p> <strong><i> Description: </i></strong>${apartment.description}</p> <hr>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="details.html?unit_number=${apartment.unit_number}" class="btn btn-primary">More Details</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+                    listingsContainer.appendChild(card);
+                });
+            }
+
+            function updatePaginationControls() {
+                const pageButtonsContainer = document.getElementById('pageButtons');
+                pageButtonsContainer.innerHTML = '';
+
+                for (let i = 1; i <= totalPages; i++) {
+                    const pageButton = document.createElement('button');
+                    pageButton.className = 'btn btn-sm btn-outline-secondary mx-1';
+                    pageButton.textContent = i;
+
+                    if (i === currentPage) {
+                        pageButton.classList.add('active');
+                    }
+
+                    pageButton.addEventListener('click', function () {
+                        currentPage = i;
+                        fetchApartments(currentPage);
+                        updateUrlParam(currentPage);
+                        updatePaginationControls();
+                    });
+
+                    pageButtonsContainer.appendChild(pageButton);
+                }
+            }
+
+            document.addEventListener('click', function (e) {
+                if (e.target && e.target.classList.contains('edit-btn')) {
+                    const index = parseInt(e.target.getAttribute('data-index'), 10);
+                    currentApartmentIndex = index; // Store the index of the apartment being edited
+                    const apartmentToEdit = apartments[(currentPage - 1) * itemsPerPage + index];
+                    populateEditModal(apartmentToEdit);
+                }
+            });
+            function populateEditModal(apartment) {
+                // Set the values for each field in the form based on the apartment object
+                document.getElementById('apartmentName').value = apartment.name;
+                document.getElementById('unitNumber').value = apartment.unit_number;
+                document.getElementById('location').value = apartment.location;
+                document.getElementById('distanceFromCollege').value = apartment.distance_from_college;
+                document.getElementById('features').value = apartment.features.join(', '); // Assuming this is a text field
+                document.getElementById('amenities').value = apartment.amenities.join(', '); // Assuming this is a text field
+                document.getElementById('pricing').value = apartment.pricing;
+                document.getElementById('contactInfo').value = apartment.contact_info;
+                document.getElementById('rating').value = apartment.rating;
+                document.getElementById('reviewCount').value = apartment.review_count;
+                document.getElementById('availability').checked = apartment.availability === "Yes"; // Assuming this is a checkbox
+                document.getElementById('description').value = apartment.description;
+            }
+
+
+            document.getElementById('editApartmentForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                // Check that we have a valid index before attempting to update
+                if (currentApartmentIndex !== null) {
+                    // Get the updated data from the form
+                    const updatedName = document.getElementById('apartmentName').value;
+                    // Update the apartment's data
+                    const arrayIndex = (currentPage - 1) * itemsPerPage + currentApartmentIndex;
+                    apartments[arrayIndex].name = updatedName;
+                    // Update other fields similarly...
+                    displayApartments(); // Refresh the apartment listings
+                    // Hide the modal after updating
+                    let editModal = bootstrap.Modal.getInstance(document.getElementById('editApartmentModal'));
+                    editModal.hide();
+                    // Reset the index
+                    currentApartmentIndex = null;
+                } else {
+                    console.error('No apartment is currently being edited.');
+                }
+            });
+
+
+
+
+            document.getElementById('editApartmentForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                // Collect data from form fields
+                const updatedName = document.getElementById('apartmentName').value;
+                // Repeat for other fields
+
+                // Update the currentApartment object
+                currentApartment.name = updatedName;
+                // Repeat for other fields
+
+                // Save changes to the server or local storage if needed
+
+                // Update the display with new details
+                displayApartmentDetails(currentApartment);
+
+                // Close modal after saving changes
+                const editModal = bootstrap.Modal.getInstance(document.getElementById('editApartmentModal'));
+                editModal.hide();
+            });
+
+            document.addEventListener('click', function (e) {
+                if (e.target && e.target.classList.contains('delete-btn')) {
+                    const index = parseInt(e.target.getAttribute('data-index'), 10);
+                    const globalIndex = (currentPage - 1) * itemsPerPage + index; // Convert to index in global array
+                    apartments.splice(globalIndex, 1); // Modify your global apartments array
+
+                    totalPages = Math.ceil(apartments.length / itemsPerPage);
+                    currentPage = Math.min(currentPage, totalPages); // Adjust current page if necessary
+
+                    displayApartments(); // Assumes this takes the current page number
+                    updatePaginationControls(); // Recalculate and display pagination controls
+                }
+            });
+
+
+
+
+
+
+            document.getElementById('prev').addEventListener('click', function () {
+                if (currentPage > 1) {
+                    currentPage--;
+                    fetchApartments(currentPage);
+                    updateUrlParam(currentPage);
+                }
+            });
+
+            document.getElementById('next').addEventListener('click', function () {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    fetchApartments(currentPage);
+                    updateUrlParam(currentPage);
+                }
+            });
+
+            document.querySelectorAll('.dropdown-item').forEach(item => {
+                item.addEventListener('click', function (e) {
+                    e.preventDefault(); // Prevent the default action of clicking on the link
+
+                    currentPage = 1;
+                    currentFilter = e.target.textContent.trim();
+                    fetchApartments(currentPage, currentFilter);
+
+                    // Update the URL with the selected filter using the History API
+                    const url = new URL(window.location.href);
+                    url.searchParams.set('filter', currentFilter);
+                    window.history.pushState({}, '', url);
+                });
+            });
+
+
+
+            document.getElementById('prev').addEventListener('click', function () {
+                if (currentPage > 1) {
+                    currentPage--;
+                    fetchApartments(currentPage, currentFilter);
+                    updateUrlParam(currentPage);
+                }
+            });
+
+            document.getElementById('next').addEventListener('click', function () {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    fetchApartments(currentPage, currentFilter);
+                    updateUrlParam(currentPage);
+                }
+            });
+            fetchApartments(currentPage, currentFilter);
+
+
+
+
+        });
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

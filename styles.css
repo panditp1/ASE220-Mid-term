@@ -33,6 +33,10 @@ body {
     margin-bottom: 25px; 
 }
 
+.btn-back {
+    background-color: blue;
+}
+
 
 #title {
     font-weight: 400;
