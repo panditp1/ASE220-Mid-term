@@ -9,6 +9,85 @@ body, html {
     background-position: center; 
 }
 
+.navbar-custom {
+    background: linear-gradient(to right, #99bae2, #4da5ce, #7987d7);
+    color: #ffffff;
+}
+
+.navbar-custom .navbar-brand, .navbar-custom .nav-link {
+    color: #ffffff; 
+    transition: color 0.3s ease;
+}
+
+.icon-img {
+    margin-left: 15px;
+}
+
+.navbar-custom .navbar-brand:hover, .navbar-custom .nav-link:hover {
+    color: #cae9ff; 
+}
+
+.search-area{
+    margin-right: 50px;
+}
+
+.search-button {
+    margin-left: 12px;
+}
+
+
+
+#title {
+    font-weight: 400;
+}
+
+#togglerBtn {
+    border-radius: 30px;
+    border: 2px solid black;
+}
+
+#home, #contact, #navbarDropdown {
+    font-size: 17px;
+    color: #38393a; 
+}
+
+#home:hover, #contact:hover, #navbarDropdown:hover {
+    color: rgb(239, 233, 236);
+}
+
+.search-button, #signIns {
+    font-weight: 200;
+    color: #ffffff;
+    background-color: #85bff3; 
+    border: none;
+    transition: background-color 0.3s ease;
+    margin-right: 15px;
+}
+
+
+.search-button:hover, #signIns:hover {
+    color: #ffffff; 
+    background-color: #6ba8e4; 
+}
+
+.dropdown-item {
+    font-weight: 350;
+    color: #343a40; 
+}
+
+.form-inline.my-2.my-lg-0 {
+    margin-left: auto; 
+    margin-right: 7%; 
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+a.nav-link:hover, .dropdown-item:hover {
+    color: #e1e0ed; 
+}
+
 .container {
     display: flex;
     justify-content: center;
@@ -78,4 +157,5 @@ td {
         padding: 10px;
     }
 }
+
 
