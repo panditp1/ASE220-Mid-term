@@ -1,0 +1,218 @@
+body {
+    background-image: url('../images/background_image.jpg');
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
+    background-size: cover; 
+    background-position: center; 
+}
+
+
+.navbar-custom {
+    background: linear-gradient(to right, #99bae2, #4da5ce, #7987d7);
+    color: #ffffff;
+}
+
+.navbar-custom .navbar-brand, .navbar-custom .nav-link {
+    color: #ffffff; 
+    transition: color 0.3s ease;
+}
+
+.icon-img {
+    margin-left: 15px;
+}
+
+.navbar-custom .navbar-brand:hover, .navbar-custom .nav-link:hover {
+    color: #cae9ff; 
+}
+
+.middle-text {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: #20375b; 
+    background-color: #b7d9ec;
+    width: fit-content;
+    padding: 20px 0;
+    margin: 18px auto; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+    max-width: 80%;
+    text-align: center; 
+}
+
+.apartment_name {
+    font-family: Cursive, sans-serif; 
+    color: #333; 
+    text-shadow: 5px 5px 1px rgba(0,0,0,0.1); 
+    margin-top: 9px !important; 
+    margin-bottom: 25px; 
+}
+
+.search-area{
+    margin-right: 50px;
+}
+
+.search-button {
+    margin-left: 12px;
+}
+
+.btn-back {
+    background-color: blue;
+}
+
+.add-btn {
+    text-align: center;
+}
+
+
+#title {
+    font-weight: 400;
+}
+
+#togglerBtn {
+    border-radius: 30px;
+    border: 2px solid black;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.pagination button {
+    color: #071820; 
+    background-color: rgba(184, 206, 231, 0.8); 
+    border: 1px solid #1d536c; 
+    border-radius: 5px;
+    padding: 8px 16px;
+    margin: 0 5px;
+    cursor: pointer; 
+    transition: background-color 0.3s ease, color 0.3s ease; 
+}
+
+.pagination button:hover {
+    background-color: #4da5ce; 
+    color: #ffffff;
+}
+
+.pagination button.active {
+    color: #040f28;
+    background: linear-gradient(135deg, #c6cfda 0%, #4686d4 100%); 
+    border-radius: 5px; 
+    padding: 8px 16px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+}
+
+
+@media (min-width: 992px) {
+    #title {
+        padding-left: 20px; 
+        padding-right: 20px;
+    }
+}
+
+
+#home, #contact, #navbarDropdown {
+    font-size: 17px;
+    color: #38393a; 
+}
+
+#home:hover, #contact:hover, #navbarDropdown:hover {
+    color: rgb(239, 233, 236);
+}
+
+.search-button, #signIns {
+    font-weight: 200;
+    color: #ffffff;
+    background-color: #85bff3; 
+    border: none;
+    transition: background-color 0.3s ease;
+    margin-right: 15px;
+}
+
+
+.search-button:hover, #signIns:hover {
+    color: #ffffff; 
+    background-color: #6ba8e4; 
+}
+
+.dropdown-item {
+    font-weight: 350;
+    color: #343a40; 
+}
+
+.form-inline.my-2.my-lg-0 {
+    margin-left: auto; 
+    margin-right: 7%; 
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+a.nav-link:hover, .dropdown-item:hover {
+    color: #e1e0ed; 
+}
+
+
+.modal-title.modal_title {
+    font-family: 'Poppins', sans-serif; 
+    font-size: 28px; 
+    font-weight: 600; 
+    color: #1d2d3c; 
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    margin-bottom: 5px; 
+    text-align: center; 
+}
+
+
+
+.modal-body {
+    padding: 20px; 
+}
+
+.modal-body p {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 20px;
+    margin: 10px; 
+    line-height: 1.6; 
+    color: #1b0303;
+}
+
+.modal-body img {
+    border-radius: 8px; 
+    margin-bottom: 15px; 
+}
+
+.btn-primary {
+    background-color: #007bff; 
+    border: none; 
+    box-shadow: 0 2px 4px rgba(0,0,0,.1); 
+}
+
+.btn-secondary {
+    background-color: #6c757d; 
+}
+
+.modal-body hr {
+
+    margin-top: 20px; 
+    margin-bottom: 20px; 
+    border-color: #250a0a;
+    border-width: 1.8px; 
+}
+
+.card {
+    box-shadow: 5px 6px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    border: none;
+    background-color: rgba(199, 206, 222, 0.6)
+  }
+
+  .card:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+    transform: translateY(-5px);
+  }
